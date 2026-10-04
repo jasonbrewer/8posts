@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>What should your video cost? Free estimate</title>
+    <meta
+      name="description"
+      content="Get an honest, itemised estimate for your video in about two minutes — no account, no sales call, no email required. See where the real costs hide, then book a call if you want one."
+    />
+    <link rel="canonical" href="https://8posts.com/scope/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="What should your video cost? Free estimate" />
+    <meta
+      property="og:description"
+      content="An honest, itemised estimate for your video in about two minutes — no account, no email required."
+    />
+    <meta property="og:url" content="https://8posts.com/scope/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="What should your video cost? Free estimate" />
+    <meta
+      name="twitter:description"
+      content="An honest, itemised estimate for your video in about two minutes — no account, no email required."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="scope.css?v=202608121354" />
+    <link rel="stylesheet" href="../styles.css" />
+
+
+    <STYLE> 
+
+
+
+
+</STYLE>
+  </head>
+  <body>
+
+
+<!-- ── NAV (slimmed from 8 items to 3 + CTA) ─────────────────────────────── -->
+<header class="nav-bar">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html"  aria-label="8 Post Productions home">
+      <img src="../img/8postslogoWhite2.png" alt="8 Post Productions">
+    </a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    </button>
+    <nav class="nav-links" id="navlinks">
+      <a class="link" href="../portfolio.html">Work</a>
+      <a class="link" href="">What it costs</a>
+      <a class="link js-book" href="#book">Contact</a>
+      <a class="pill nav-cta js-book" href="#book">Get started</a>
+    </nav>
+  </div>
+</header>
+
+
+
+    <div id="scope-root"></div>
+
+<!-- ── BOOKING MODAL (vanilla) ───────────────────────────────────────────── -->
+<div class="book-overlay" id="bookOverlay" role="dialog" aria-modal="true" aria-label="Book a time">
+  <div class="book-modal">
+    <div class="book-head">
+      <h3>Book a time</h3>
+      <button class="book-close" id="bookClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="book-body">
+      <iframe id="bookFrame" title="Booking" loading="lazy" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<button class="totop" id="toTop" aria-label="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>
+</button>
+
+<!-- ── SITE JS (nav, booking, back-to-top) ───────────────────────────────── -->
+<script>
+(function(){
+  var CAL_IFRAME = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0qjWiIAEzrOzFrJyPog1yhmflvRvygPZNrkt3rDzJJODqFgFjuJjFt0MbrnmrnKViamDnOXc_w?gv=true";
+  var CAL_LINK   = "https://calendar.app.google/YcjTkyQbm9hJv12t8";
+
+  /* mobile nav */
+  var burger = document.getElementById('burger');
+  var links  = document.getElementById('navlinks');
+  burger.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.addEventListener('click', function(e){
+    if (e.target.closest('a')) { links.classList.remove('open'); burger.setAttribute('aria-expanded','false'); }
+  });
+
+  /* booking: desktop = modal, mobile = new tab */
+  var overlay = document.getElementById('bookOverlay');
+  var frame   = document.getElementById('bookFrame');
+  var loaded  = false;
+  function isMobile(){ return window.matchMedia('(max-width:767px)').matches; }
+  function openBook(){
+    if (isMobile()){ window.open(CAL_LINK, '_blank', 'noopener'); return; }
+    if (!loaded){ frame.src = CAL_IFRAME; loaded = true; }
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeBook(){ overlay.classList.remove('open'); document.body.style.overflow = ''; }
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('.js-book');
+    if (b){ e.preventDefault(); openBook(); }
+  });
+  document.getElementById('bookClose').addEventListener('click', closeBook);
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) closeBook(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeBook(); });
+
+  /* back to top */
+  var toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', function(){
+    toTop.classList.toggle('show', window.scrollY > 700);
+  }, {passive:true});
+  toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+})();
+</script>
+
+    <noscript>
+      <p style="max-width: 34rem; margin: 4rem auto; padding: 0 1.25rem; line-height: 1.6">
+        The estimator needs JavaScript to add up — it does all of its arithmetic in your browser
+        and sends nothing anywhere to work out a number. Turn JavaScript on for this page, or book
+        a call and we&rsquo;ll price the job with you.
+      </p>
+    </noscript>
+
+
+    <script src="scope.js?v=202608121354" defer></script>
+
+  <script>
+
+     
+
+
+      (function () {
+        if (/[?&]notrack=1(&|$)/.test(location.search)) return;
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-NEMNJ919KG';
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-NEMNJ919KG');
+      })();
+    </script>
+  </body>
+</html>

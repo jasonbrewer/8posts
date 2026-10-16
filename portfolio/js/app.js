@@ -193,7 +193,8 @@
     var url = embedURL(item);
     if (!url) return;
     lastFocused = document.activeElement;
-    lbFrame.innerHTML = '<iframe src="' + url + '" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+    // referrerpolicy: YouTube refuses to play embeds that don't say which site they're on (Error 153)
+    lbFrame.innerHTML = '<iframe src="' + url + '" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
     lb.classList.add("open");
     document.body.style.overflow = "hidden";
     lbClose.focus();
